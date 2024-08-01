@@ -71,4 +71,40 @@ const clearCart=async (req,res)=>{
     res.json({message:"cart cleared",cart});
 }
 
-module.exports={addToCart,userCart,removeProductFromCart,clearCart};
+// decrease qty from product
+const decreaseProductQty=async (req,res)=>{
+
+    const {productId,qty}=req.body;
+
+    const userId="66a3a8c3e320087a58b32035";
+    let cart=await Cart.findOne({userId});
+
+    if(!cart){
+        cart=new Cart({userId,items: [] });
+    }
+    try{
+        const itemIndex=cart.items.findIndex((item)=>item.productId.toString()===productId)
+    if(itemIndex>-1){
+        const item=cart.items[itemIndex];
+
+        if(item.qty>qty){
+            const pricePerUnit=item.price/item.qty;
+
+            item.qty -=qty;
+            item.price-=pricePerUnit*qty;
+        }else{
+            cart.items.splice(itemIndex,1);
+        }
+    }else{
+        return res.json({message:"invalid product id"});
+    }
+    
+
+    await cart.save();
+    res.json({message:"Items qty decreased",cart});
+    }
+    catch(err){
+        res.json({message:err.message});
+    }
+}
+module.exports={addToCart,userCart,removeProductFromCart,clearCart,decreaseProductQty};
