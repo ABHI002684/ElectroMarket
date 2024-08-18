@@ -4,7 +4,7 @@ const Cart=require('../models/cart');
 const addToCart=async (req,res)=>{
     const {productId,title,price,qty,imgSrc}=req.body;
 
-    const userId="66a3a8c3e320087a58b32035";
+    const userId=req.user;
     let cart=await Cart.findOne({userId});
 
     if(!cart){
@@ -26,7 +26,7 @@ const addToCart=async (req,res)=>{
 
 // get user cart
 const userCart=async (req,res)=>{
-    const userId="66a3a8c3e320087a58b32035";
+    const userId=req.user;
 
     const cart=await Cart.findOne({userId});
 
@@ -40,7 +40,7 @@ const userCart=async (req,res)=>{
 // remove product from cart
 const removeProductFromCart=async (req,res)=>{
     const productId=req.params.productId;
-    const userId="66a3a8c3e320087a58b32035";
+    const userId=req.user;
 
     const cart=await Cart.findOne({userId});
 
@@ -56,7 +56,7 @@ const removeProductFromCart=async (req,res)=>{
 // remove product from cart
 const clearCart=async (req,res)=>{
     
-    const userId="66a3a8c3e320087a58b32035";
+    const userId=req.user;
 
     const cart=await Cart.findOne({userId});
 
@@ -76,7 +76,7 @@ const decreaseProductQty=async (req,res)=>{
 
     const {productId,qty}=req.body;
 
-    const userId="66a3a8c3e320087a58b32035";
+    const userId=req.user;
     let cart=await Cart.findOne({userId});
 
     if(!cart){
