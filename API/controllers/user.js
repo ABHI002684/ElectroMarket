@@ -35,10 +35,11 @@ const login=async (req,res)=> {
         }
 
         const token=jwt.sign({userId:user._id},"!@#$%^&*()",{
-            expiresIn:'365'
+            expiresIn:'365d'
         })
         res.json({message:`welcome ${user.name}`,token,success:true,user});
     }catch(err){
+        // console.log(err);
         res.json({message:err.message});
     }
 }
@@ -52,4 +53,9 @@ const users=async (req,res)=>{
         res.json({message:err.message,success:false});
     }
 }
-module.exports={register,login,users};
+
+//get user profile
+const profile= async (req,res)=>{
+    res.json({user:req.user});
+}
+module.exports={register,login,users,profile};
