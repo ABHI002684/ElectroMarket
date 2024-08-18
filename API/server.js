@@ -4,6 +4,7 @@ const bodyParser=require('body-parser');
 const userRouter=require('./routes/user');
 const productRouter=require('./routes/product');
 const cartRouter=require('./routes/cart');
+const addressRouter=require('./routes/address');
 const app=express();
 const PORT=1000;
 
@@ -19,6 +20,9 @@ app.use('/api/product',productRouter);
 
 //using cart's router
 app.use('/api/cart',cartRouter);
+
+//using address's router
+app.use('/api/address',addressRouter);
 
 mongoose.connect(
     "mongodb+srv://abhishek002684:uR94nwtbxuSoeWj1@cluster0.etykbra.mongodb.net/",{
