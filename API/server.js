@@ -5,10 +5,18 @@ const userRouter=require('./routes/user');
 const productRouter=require('./routes/product');
 const cartRouter=require('./routes/cart');
 const addressRouter=require('./routes/address');
+const cors=require('cors');
 const app=express();
 const PORT=1000;
 
 app.use(bodyParser.json());
+
+//using cors to connect backend and frontend
+app.use(cors({
+    origin:true,
+    methods:["GET","POST","PUT","DELETE"],
+    credentials:true
+}))
 //home testing route
 app.get('/',(req,res)=>res.json({message:"this is a home route"}));
 
