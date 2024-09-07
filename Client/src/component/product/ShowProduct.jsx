@@ -2,12 +2,12 @@ import React, { useContext } from 'react'
 import AppContext from '../../Context/AppContext';
 import {Link} from 'react-router-dom';
 const ShowProduct = () => {
-  const { products } = useContext(AppContext);
+  const { products,filteredData } = useContext(AppContext);
   return (
     <>
     <div className="container  d-flex justify-content-center align-items-center">
       <div className="row  container d-flex justify-content-center align-items-center my-5">
-      {products?.map((product) => <div key={product.id} className='my-3 col-md-4 d-flex justify-content-center align-items-center'>
+      {filteredData?.map((product) => <div key={product.id} className='my-3 col-md-4 d-flex justify-content-center align-items-center'>
         <div className="card bg-dark text-light text-center" style={{ width: '18rem' }}>
           <Link to={`/product/${product._id}`} className="d-flex justify-content-center align-items-center p-3">
             <img src={product.imgSrc} className="card-img-top" alt="..." style={{ width: '200px', height: '200px', borderRadius:'10px', border:'2px solid yellow'}} />
