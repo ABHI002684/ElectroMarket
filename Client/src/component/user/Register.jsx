@@ -47,7 +47,7 @@ const Register = () => {
     <input name="password" value={formData.password} onChange={onchangerHandler} type="password" className="form-control" id="exampleInputPassword1" />
   </div>
   <div className='d-grid col-6 mx-auto my-3'>
-  <button type="submit" className="btn btn-primary">Login</button>
+  <button type="submit" className="btn btn-primary">Register</button>
   </div>
   </form>
     </div>
