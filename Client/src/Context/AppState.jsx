@@ -16,6 +16,8 @@ const AppState = (props) => {
   const [user, setUser] = useState();
   const [cart, setCart] = useState([]);
   const [reload, setReload] = useState(false);
+  const [userAddress, setUserAddress] = useState("");
+
   useEffect(() => {
     const fetchProduct = async () => {
       const api = await axios.get(`${url}/product/all`, {
@@ -32,6 +34,7 @@ const AppState = (props) => {
     }
     fetchProduct();
     userCart();
+    getAddress();
   }, [token,reload]);
 
   useEffect(() => {
@@ -148,7 +151,7 @@ const AppState = (props) => {
       withCredentials: true
     });
     setReload(!reload);
-    console.log("my cart",api);
+    // console.log("my cart",api);
     toast.success(api.data.message, {
       position: "top-right",
       autoClose: 1500,
@@ -177,7 +180,172 @@ const AppState = (props) => {
     setCart(api.data.cart);
     
   }
-  return <AppContext.Provider value={{ products, register, login, url, token,setToken, isAuthenticated, setIsAuthenticated,filteredData, setFilteredData,logout,user,addToCart,cart}}>{props.children}<ToastContainer /></AppContext.Provider>;
+
+  //decrease qty
+  const decreaseQty = async (productId,qty) => {
+    const api = await axios.post(`${url}/cart/--qty`,
+      {productId,qty},
+      {
+      headers: {
+        "content-type": "Application/json",
+        Auth:token
+      },
+      withCredentials: true
+    })
+    
+    setReload(!reload);
+    toast.success(api.data.message, {
+      position: "top-right",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
+    // console.log("decrease quantity ",api);
+    // setCart(api.data.cart);
+    
+  }
+
+  // remove product from cart
+  const removeFromCart = async (productId) => {
+    const api = await axios.delete(`${url}/cart/remove/${productId}`,
+      {
+      headers: {
+        "content-type": "Application/json",
+        Auth:token
+      },
+      withCredentials: true
+    })
+    
+    setReload(!reload);
+    toast.success("remove item from cart", {
+      position: "top-right",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
+    // console.log("decrease quantity ",api);
+    // setCart(api.data.cart);
+    
+  }
+
+  //clear cart
+  const clearCart = async () => {
+    const api = await axios.delete(`${url}/cart/clear`,
+      {
+      headers: {
+        "content-type": "Application/json",
+        Auth:token
+      },
+      withCredentials: true
+    })
+    
+    setReload(!reload);
+    toast.success(api.data.message, {
+      position: "top-right",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
+    // console.log("decrease quantity ",api);
+    // setCart(api.data.cart);
+    
+  }
+
+  //Add shipping address
+  const shippingAddress = async (fullName,
+    address,
+    city,
+    state,
+    country,
+    pincode,
+    phoneNumber) => {
+    const api = await axios.post(`${url}/address/add`,
+      {fullName,
+        address,
+        city,
+        state,
+        country,
+        pincode,
+        phoneNumber},
+      {
+      headers: {
+        "content-type": "Application/json",
+        Auth:token
+      },
+      withCredentials: true
+    })
+    
+    setReload(!reload);
+    toast.success(api.data.message, {
+      position: "top-right",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
+
+    return api.data;
+    // console.log("decrease quantity ",api);
+    // setCart(api.data.cart);
+    
+  }
+
+  //get user latest address
+  const getAddress = async () =>{
+    const api=await  axios.get(`${url}/address/get`,{
+      headers:{
+        "Content-Type":"Application/json",
+        Auth:token
+      },
+      withCredentials:true
+    });
+
+    // console.log("user Address",api.data.userAddress);
+    setUserAddress(api.data.userAddress);
+  }
+
+  return <AppContext.Provider value={{ products, 
+    register, 
+    login, 
+    url, 
+    token,
+    setToken, 
+    isAuthenticated, 
+    setIsAuthenticated,
+    filteredData, 
+    setFilteredData,
+    logout,
+    user,
+    addToCart,
+    cart,
+    decreaseQty,
+    removeFromCart,
+    clearCart,
+    shippingAddress,
+    userAddress
+    }}>
+      {props.children}
+      <ToastContainer />
+      </AppContext.Provider>;
 }
 
 export default AppState;
