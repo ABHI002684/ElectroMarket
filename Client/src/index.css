@@ -11,7 +11,7 @@ body::-webkit-scrollbar{
   width: 100%;
 }
 .nav_bar{
-  background-color:blueviolet;
+  background-color:rgb(48, 13, 82);
   width: 100%;
   padding: 10px;
   display: flex;
@@ -40,4 +40,22 @@ body::-webkit-scrollbar{
 }
 .search_bar input:focus{
   outline: none;
+}
+
+.sub_bar{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  background-color: rgb(132, 0, 255);
+}
+
+.sub_bar .items{
+  padding: 10px;
+  font-weight: bold;
+}
+
+.sub_bar .items:hover{
+  background-color: black;
+  cursor: pointer;
 }
