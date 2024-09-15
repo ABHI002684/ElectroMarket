@@ -13,7 +13,7 @@ const addAddress= async (req,res) =>{
         pincode,
         phoneNumber
     });
-    return res.json({message:"Address Added",userAddress});
+    return res.json({message:"Address Added",userAddress,success:true});
 };
 
 const getAddress= async (req,res)=>{
