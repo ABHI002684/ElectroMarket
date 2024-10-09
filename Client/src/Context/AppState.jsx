@@ -17,6 +17,7 @@ const AppState = (props) => {
   const [cart, setCart] = useState([]);
   const [reload, setReload] = useState(false);
   const [userAddress, setUserAddress] = useState("");
+  const [userOrder, setUserOrder] = useState([]);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -35,6 +36,7 @@ const AppState = (props) => {
     fetchProduct();
     userCart();
     getAddress();
+    user_Order();
   }, [token,reload]);
 
   useEffect(() => {
@@ -323,6 +325,21 @@ const AppState = (props) => {
     setUserAddress(api.data.userAddress);
   }
 
+  //get user order
+  const user_Order = async () =>{
+    const api=await  axios.get(`${url}/payment/userOrder`,{
+      headers:{
+        "Content-Type":"Application/json",
+        Auth:token
+      },
+      withCredentials:true
+    });
+
+    console.log("user order",api.data);
+    setUserOrder(api.data);
+  }
+
+  console.log("userOrder = ",userOrder);
   return <AppContext.Provider value={{ products, 
     register, 
     login, 
@@ -341,7 +358,8 @@ const AppState = (props) => {
     removeFromCart,
     clearCart,
     shippingAddress,
-    userAddress
+    userAddress,
+    userOrder,
     }}>
       {props.children}
       <ToastContainer />
