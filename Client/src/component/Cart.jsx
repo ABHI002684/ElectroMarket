@@ -62,9 +62,14 @@ const Cart = () => {
         </div>
         <div className="cart_action">
 
-          <div className="btn btn-warning mx-3" style={{fontWeight:'bold'}} onClick={()=>addToCart(product?.productId,product.title,product.price/product.qty,1,product.imgSrc)}>Qty++</div>
+          <div className="btn btn-warning mx-3" style={{fontWeight:'bold'}} 
+          onClick={()=>addToCart(product?.productId,product.title,product.price/product.qty,
+          1,product.imgSrc)}>
+            Qty++
+            </div>
 
-          <div className="btn btn-info mx-3" style={{fontWeight:'bold'}} onClick={()=>decreaseQty(product?.productId,1)}>Qty--</div>
+          <div className="btn btn-info mx-3" style={{fontWeight:'bold'}} 
+          onClick={()=>decreaseQty(product?.productId,1)}>Qty--</div>
 
           <div className="btn btn-danger mx-3" style={{fontWeight:'bold'}}
           onClick={()=>{
