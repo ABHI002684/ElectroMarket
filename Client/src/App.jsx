@@ -13,6 +13,8 @@ import Login from './component/user/Login';
 import Profile from './component/user/Profile';
 import Cart from './component/Cart';
 import Address from './component/Address';
+import Checkout from './component/Checkout';
+import OrderConfirmation from './component/OrderConfirmation';
 
 const App = () => {
   //const {data}=useContext(AppContext)
@@ -29,6 +31,8 @@ const App = () => {
         <Route path='/profile' element={<Profile />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/shipping' element={<Address />} />
+        <Route path='/checkout' element={<Checkout />} />
+        <Route path='/orderconfirmation' element={<OrderConfirmation />} />
       </Routes>
     </Router>
   )
