@@ -5,6 +5,7 @@ const userRouter=require('./routes/user');
 const productRouter=require('./routes/product');
 const cartRouter=require('./routes/cart');
 const addressRouter=require('./routes/address');
+const paymentRouter=require('./routes/payment');
 const cors=require('cors');
 const app=express();
 const PORT=1000;
@@ -31,6 +32,9 @@ app.use('/api/cart',cartRouter);
 
 //using address's router
 app.use('/api/address',addressRouter);
+
+//using payment router
+app.use('/api/payment',paymentRouter);
 
 mongoose.connect(
     "mongodb+srv://abhishek002684:uR94nwtbxuSoeWj1@cluster0.etykbra.mongodb.net/",{
