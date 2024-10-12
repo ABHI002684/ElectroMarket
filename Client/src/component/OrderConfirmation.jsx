@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import AppContext from '../Context/AppContext'
-import { set } from 'mongoose';
 import ShowOrderProduct from './ShowOrderProduct';
+
 const OrderConfirmation = () => {
   const {userOrder}=useContext(AppContext);
   const [latestOrder, setLatestOrder] = useState({});
