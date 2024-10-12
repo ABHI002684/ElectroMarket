@@ -8,7 +8,7 @@ const addressRouter=require('./routes/address');
 const paymentRouter=require('./routes/payment');
 const cors=require('cors');
 const app=express();
-const PORT=1000;
+const PORT=process.env.PORT || 1000;
 
 app.use(bodyParser.json());
 
@@ -38,6 +38,8 @@ app.use('/api/payment',paymentRouter);
 
 mongoose.connect(
     "mongodb+srv://abhishek002684:uR94nwtbxuSoeWj1@cluster0.etykbra.mongodb.net/",{
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
         dbName:"ElectroMarket"
     }
 ).then(()=>console.log("MongoDb Connected Successfully ...!")).catch((err)=>
