@@ -6,8 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const AppState = (props) => {
 
-
-  const url = "http://localhost:1000/api";
+  const url="https://electromarket-backend.onrender.com/api";
+  // const url = "http://localhost:1000/api";
 
   const [products, setProducts] = useState([]);
   const [token, setToken] = useState([]);
